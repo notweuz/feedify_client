@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
       AppData.userToken = authDTO.accessToken;
       AppData.saveData();
-      if (mounted) Navigator.pushNamed(context, '/');
+      if (mounted) Navigator.pushNamed(context, '/app/');
     } on DioException catch (e) {
       String errorMessage;
 

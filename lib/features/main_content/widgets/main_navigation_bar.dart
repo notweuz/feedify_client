@@ -27,7 +27,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   @override
   void initState() {
     super.initState();
-    _getProfileInfo();
+    Future.microtask(() => _getProfileInfo());
   }
 
   Future<void> _getProfileInfo() async {
@@ -47,7 +47,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
           message:
               "Произошла ошибка при загрузке профиля. Обратитесь в тех-поддержку",
         );
-        Navigator.pushNamedAndRemoveUntil(context, '/auth/', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
       }
     }
   }

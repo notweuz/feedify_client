@@ -3,6 +3,6 @@ import 'package:feedify/features/auth/auth.dart';
 import 'package:flutter/material.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  '/': (context) => MainInterface(),
-  '/auth/': (context) => AuthScreen(),
+  '/': (context) => AuthScreen(),
+  '/app/': (context) => MainInterface(),
 };

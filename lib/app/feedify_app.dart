@@ -1,6 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:feedify/app/router.dart';
-import 'package:feedify/app/theme_provider.dart';
+import 'package:feedify/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,13 +19,13 @@ class FeedifyApp extends StatelessWidget {
         ThemeData darkTheme = getDarkTheme(darkDynamic);
 
         return MaterialApp(
-            title: 'Feedify',
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: themeProvider.themeMode,
-            routes: routes
+          title: 'Feedify',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeProvider.themeMode,
+          routes: routes,
         );
-      }
+      },
     );
   }
 }

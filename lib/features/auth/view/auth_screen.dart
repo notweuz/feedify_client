@@ -1,3 +1,5 @@
+import 'package:feedify/app/app_data.dart';
+
 import 'register_page.dart';
 import 'login_page.dart';
 import 'package:feedify/features/auth/widget/widget.dart';
@@ -25,12 +27,20 @@ class _AuthScreenState extends State<AuthScreen> {
     _pageController = PageController(
       initialPage: _currentPageIndex,
     );
+
+    Future.microtask(() => _skipAuthorized());
   }
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _skipAuthorized() {
+    if (AppData.userToken != null && AppData.userToken!.isNotEmpty) {
+      Navigator.pushNamedAndRemoveUntil(context, '/app/', (route) => false);
+    }
   }
 
   @override
