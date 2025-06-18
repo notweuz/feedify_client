@@ -1,0 +1,27 @@
+name: feedify
+description: "A custom made social media app"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dynamic_color: ^1.7.0
+  dio: ^5.8.0+1
+  shared_preferences: ^2.2.0
+  flutter_dotenv: ^5.2.1
+  provider: ^6.1.5
+  shimmer_animation: ^2.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
