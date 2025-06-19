@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:feedify/app/app_data.dart';
 import 'package:feedify/features/main_content/widgets/widget.dart';
@@ -5,6 +6,7 @@ import 'package:feedify/repositories/user/models/user_dto.dart';
 import 'package:feedify/repositories/user/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class MainNavigationBar extends StatefulWidget {
   final int selectedIndex;
@@ -23,11 +25,25 @@ class MainNavigationBar extends StatefulWidget {
 class _MainNavigationBarState extends State<MainNavigationBar> {
   UserDTO? _userDTO;
   bool _isLoading = true;
+  late final StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
+
+    _connectivitySubscription = Connectivity().onConnectivityChanged.listen((results) {
+      if (results.any((result) => result != ConnectivityResult.none) && _isLoading) {
+        _getProfileInfo();
+      }
+    });
+
     Future.microtask(() => _getProfileInfo());
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
   }
 
   Future<void> _getProfileInfo() async {
@@ -38,22 +54,17 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         _isLoading = false;
       });
     } on DioException catch (e) {
-      // debugPrintStack(stackTrace: e.stackTrace);
       if (mounted) {
-        if (e.response != null && (e.response?.statusCode == 401 || e.response?.statusCode == 403)) {
+        if (e.response != null &&
+            (e.response?.statusCode == 401 || e.response?.statusCode == 403)) {
           AppData.userToken = null;
           Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
           await AppData.saveData();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                'Произошла ошибка. Невозможно подключиться к серверу.',
-              ),
-              action: SnackBarAction(
-                label: "Retry",
-                onPressed: _getProfileInfo,
-              ),
+              content: Text('Произошла ошибка. Невозможно подключиться к серверу.'),
+              action: SnackBarAction(label: "Retry", onPressed: _getProfileInfo),
             ),
           );
         }
