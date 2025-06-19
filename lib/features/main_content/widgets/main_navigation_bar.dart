@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:feedify/features/auth/widget/error_dialog.dart';
+import 'package:feedify/app/app_data.dart';
 import 'package:feedify/features/main_content/widgets/widget.dart';
 import 'package:feedify/repositories/user/models/user_dto.dart';
 import 'package:feedify/repositories/user/user_repository.dart';
@@ -38,16 +38,25 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         _isLoading = false;
       });
     } on DioException catch (e) {
-      debugPrintStack(stackTrace: e.stackTrace);
-      _isLoading = false;
+      // debugPrintStack(stackTrace: e.stackTrace);
       if (mounted) {
-        ErrorDialog.show(
-          context,
-          title: "Ошибка",
-          message:
-              "Произошла ошибка при загрузке профиля. Обратитесь в тех-поддержку",
-        );
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        if (e.response != null && (e.response?.statusCode == 401 || e.response?.statusCode == 403)) {
+          AppData.userToken = null;
+          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          await AppData.saveData();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Произошла ошибка. Невозможно подключиться к серверу.',
+              ),
+              action: SnackBarAction(
+                label: "Retry",
+                onPressed: _getProfileInfo,
+              ),
+            ),
+          );
+        }
       }
     }
   }

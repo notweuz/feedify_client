@@ -11,7 +11,7 @@ class AppData {
   static Future<void> saveData() async {
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString("userToken", AppData.userToken!);
+    await prefs.setString("userToken", AppData.userToken ?? "");
     await prefs.setString("theme", AppData.theme);
   }
 
