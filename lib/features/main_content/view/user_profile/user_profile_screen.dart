@@ -31,6 +31,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             flexibleSpace: FlexibleSpaceBar(
               background: UserProfileHeader(user: widget.user, isLoading: widget.isLoading),
             ),
+            // TODO: кнопки переключения все/медиа/нравится + кнопку назад
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((
