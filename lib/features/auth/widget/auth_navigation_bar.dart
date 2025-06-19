@@ -6,10 +6,10 @@ class AuthNavigationBar extends StatelessWidget {
   final ValueChanged<int> onDestinationSelected;
 
   const AuthNavigationBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onDestinationSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

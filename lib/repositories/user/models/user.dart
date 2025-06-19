@@ -1,4 +1,4 @@
-class UserDTO {
+class User {
   final int id;
   final String displayName;
   final String username;
@@ -8,7 +8,7 @@ class UserDTO {
   final int followersCount;
   final int followingCount;
 
-  const UserDTO({
+  const User({
     required this.id,
     required this.displayName,
     required this.username,
@@ -19,8 +19,8 @@ class UserDTO {
     required this.followingCount,
   });
 
-  factory UserDTO.fromJson(Map<String, dynamic> json) {
-    return UserDTO(
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
       id: json["id"],
       displayName: json["display_name"],
       username: json["username"],

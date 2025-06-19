@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:feedify/app/app_data.dart';
 import 'package:feedify/features/main_content/widgets/widget.dart';
 import 'package:feedify/l10n/app_localizations.dart';
-import 'package:feedify/repositories/user/models/user_dto.dart';
+import 'package:feedify/repositories/user/models/user.dart';
 import 'package:feedify/repositories/user/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -24,7 +24,7 @@ class MainNavigationBar extends StatefulWidget {
 }
 
 class _MainNavigationBarState extends State<MainNavigationBar> {
-  UserDTO? _userDTO;
+  User? _user;
   bool _isLoading = true;
   late final StreamSubscription<List<ConnectivityResult>>
   _connectivitySubscription;
@@ -56,7 +56,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
     try {
       final user = await UserRepository.getSelfInfo();
       setState(() {
-        _userDTO = user;
+        _user = user;
         _isLoading = false;
       });
     } on DioException catch (e) {
@@ -110,14 +110,14 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
             ),
             label: localization.mainNavigationBarUserLabel,
           )
-        else if (_userDTO != null)
+        else if (_user != null)
           NavigationDestination(
             selectedIcon: NavigationBarUserAvatar(
-              userDTO: _userDTO!,
+              user: _user!,
               size: 30,
               isSelected: true,
             ),
-            icon: NavigationBarUserAvatar(userDTO: _userDTO!, size: 30),
+            icon: NavigationBarUserAvatar(user: _user!, size: 30),
             label: localization.mainNavigationBarUserLabel,
           ),
       ],

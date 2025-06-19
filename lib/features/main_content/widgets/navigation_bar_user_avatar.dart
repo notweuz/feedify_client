@@ -1,14 +1,14 @@
-import 'package:feedify/repositories/user/models/user_dto.dart';
+import 'package:feedify/repositories/user/models/user.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBarUserAvatar extends StatelessWidget {
-  final UserDTO userDTO;
+  final User user;
   final double size;
   final bool isSelected;
 
   const NavigationBarUserAvatar({
     super.key,
-    required this.userDTO,
+    required this.user,
     required this.size,
     this.isSelected = false,
   });
@@ -21,11 +21,11 @@ class NavigationBarUserAvatar extends StatelessWidget {
       width: size,
       height: size,
       child: ClipOval(
-        child: userDTO.avatarUrl != null && userDTO.avatarUrl!.isNotEmpty
+        child: user.avatarUrl != null && user.avatarUrl!.isNotEmpty
             ? Stack(
                 children: [
                   Image.network(
-                    userDTO.avatarUrl!,
+                    user.avatarUrl!,
                     fit: BoxFit.cover,
                     width: size,
                     height: size,

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:feedify/app/app_data.dart';
 import 'package:feedify/l10n/app_localizations.dart';
 import 'package:feedify/repositories/auth/auth_repository.dart';
-import 'package:feedify/repositories/auth/models/register_dto.dart';
+import 'package:feedify/repositories/auth/models/register.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/widget.dart';
@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     try {
       final authDTO = await AuthRepository.register(
-        RegisterDTO(
+        Register(
           displayName: _displayNameController.text,
           username: _usernameController.text,
           password: _passwordController.text,

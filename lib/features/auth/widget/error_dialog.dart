@@ -6,11 +6,11 @@ class ErrorDialog extends StatelessWidget {
   final String buttonText;
 
   const ErrorDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.message,
     this.buttonText = 'OK',
-  }) : super(key: key);
+  });
 
   static Future<void> show(
     BuildContext context, {

@@ -1,9 +1,9 @@
-class RegisterDTO {
+class Register {
   final String? displayName;
   final String username;
   final String password;
 
-  const RegisterDTO({
+  const Register({
     this.displayName,
     required this.username,
     required this.password,

@@ -3,7 +3,7 @@ import 'package:feedify/app/app_data.dart';
 import 'package:feedify/features/auth/widget/widget.dart';
 import 'package:feedify/l10n/app_localizations.dart';
 import 'package:feedify/repositories/auth/auth_repository.dart';
-import 'package:feedify/repositories/auth/models/login_dto.dart';
+import 'package:feedify/repositories/auth/models/login.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,14 +27,14 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     final localizations = AppLocalizations.of(context)!;
     try {
-      final authDTO = await AuthRepository.login(
-        LoginDTO(
+      final auth = await AuthRepository.login(
+        Login(
           username: _usernameController.text,
           password: _passwordController.text,
         ),
       );
 
-      AppData.userToken = authDTO.accessToken;
+      AppData.userToken = auth.accessToken;
       AppData.saveData();
       if (mounted) {
         Navigator.pushNamed(context, '/app/');

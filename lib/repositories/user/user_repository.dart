@@ -1,12 +1,12 @@
 import 'package:feedify/app/app_data.dart';
-import 'package:feedify/repositories/user/models/user_dto.dart';
+import 'package:feedify/repositories/user/models/user.dart';
 
 class UserRepository {
-  static Future<UserDTO> getSelfInfo() async {
+  static Future<User> getSelfInfo() async {
     final response = await AppData.getDioWithToken().get(
       "${AppData.serverUrl}users/me",
     );
-    UserDTO userDTO = UserDTO.fromJson(response.data);
-    return userDTO;
+    User user = User.fromJson(response.data);
+    return user;
   }
 }
