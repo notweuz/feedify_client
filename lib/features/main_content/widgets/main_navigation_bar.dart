@@ -112,12 +112,11 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
           )
         else if (_user != null)
           NavigationDestination(
-            selectedIcon: NavigationBarUserAvatar(
+            selectedIcon: UserAvatarWidget(
               user: _user!,
               size: 30,
-              isSelected: true,
             ),
-            icon: NavigationBarUserAvatar(user: _user!, size: 30),
+            icon: UserAvatarWidget(user: _user!, size: 30),
             label: localization.mainNavigationBarUserLabel,
           ),
       ],

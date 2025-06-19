@@ -1,2 +1,3 @@
 export 'main_navigation_bar.dart';
-export 'navigation_bar_user_avatar.dart';
+export 'user_avatar_widget.dart';
+export 'user_no_avatar_widget.dart';
