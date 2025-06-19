@@ -1,1 +1,35 @@
-*.cpp linguist-vendored
+# Основной код Flutter проекта (Dart)
+*.dart linguist-language=Dart
+
+# --- Сгенерированные файлы Flutter ---
+
+# Android (Java/Kotlin/Gradle)
+android/app/build/ linguist-generated
+android/gradle/ linguist-generated
+android/gradlew linguist-generated
+android/gradlew.bat linguist-generated
+android/*.iml linguist-generated
+android/local.properties linguist-generated
+android/app/src/main/kotlin/**/*.g.kt linguist-generated # Сгенерированные файлы Kotlin (например, от build_runner)
+android/app/src/main/java/**/*.g.java linguist-generated # Сгенерированные файлы Java (например, от build_runner)
+
+# Windows (C++/CMake/Visual Studio)
+windows/CMakeLists.txt linguist-generated
+windows/*.vcxproj linguist-generated
+windows/*.sln linguist-generated
+windows/*.vcxproj.filters linguist-generated
+windows/*.vcxproj.user linguist-generated
+windows/flutter/CMakeLists.txt linguist-generated
+windows/runner/CMakeLists.txt linguist-generated
+windows/runner/*.rc linguist-generated # Ресурсные файлы Windows
+windows/flutter/generated_plugin_registrant.h linguist-generated
+windows/flutter/generated_plugin_registrant.cpp linguist-generated
+
+# Общие сгенерированные файлы Flutter
+lib/**/*.g.dart linguist-generated
+lib/**/*.freezed.dart linguist-generated
+lib/generated_plugin_registrant.dart linguist-generated
+.dart_tool/ linguist-generated
+.flutter-plugins linguist-generated
+.flutter-plugins-dependencies linguist-generated
+.packages linguist-generated
