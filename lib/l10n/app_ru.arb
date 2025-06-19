@@ -1,0 +1,31 @@
+{
+  "loginErrorTitle": "Ошибка входа",
+  "loginWrongPasswordMessage": "Неверный пароль!",
+  "loginNoSuchUserMessage": "Пользователя с таким именем не существует!",
+  "loginServerErrorMessage": "Ошибка сервера! Код состояния: {statusCode}.",
+  "loginErrorMessage": "Не удалось войти. Пожалуйста, попробуйте позже.",
+  "loginUsernameLabel": "Имя пользователя",
+  "loginPasswordLabel": "Пароль",
+  "loginButtonText": "Войти",
+  "loginPageLabel": "Вход",
+
+  "registerErrorTitle": "Ошибка регистрации",
+  "registerPasswordMismatchTitle": "Пароли не совпадают",
+  "registerPasswordMismatchMessage": "Пароли не совпадают!",
+  "registerSameUsernameExistsMessage": "Пользователь с таким именем уже существует!",
+  "registerServerErrorMessage": "Ошибка сервера! Код состояния: {statusCode}.",
+  "registerErrorMessage": "Не удалось зарегистрироваться. Пожалуйста, попробуйте позже.",
+  "registerDisplayNameLabel": "Отображаемое имя (необязательно)",
+  "registerUsernameLabel": "Имя пользователя",
+  "registerPasswordLabel": "Пароль",
+  "registerPasswordAgainLabel": "Пароль (ещё раз)",
+  "registerButtonText": "Зарегистрироваться",
+  "registerPageLabel": "Регистрация",
+
+  "mainContentNetworkSnackBarErrorMessage": "Не удалось подключиться к серверу. Попробуйте позже.",
+  "mainContentNetworkSnackBarErrorButtonLabel": "Повторить",
+
+  "mainNavigationBarFeedLabel": "Лента",
+  "mainNavigationBarSearchLabel": "Поиск",
+  "mainNavigationBarUserLabel": "Пользователь"
+}

@@ -1,3 +1,4 @@
+import 'package:feedify/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AuthNavigationBar extends StatelessWidget {
@@ -12,19 +13,20 @@ class AuthNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return NavigationBar(
       onDestinationSelected: onDestinationSelected,
       selectedIndex: selectedIndex,
-      destinations: const [
+      destinations: [
         NavigationDestination(
-          selectedIcon: Icon(Icons.app_registration),
-          icon: Icon(Icons.app_registration_outlined),
-          label: "Регистрация",
+          selectedIcon: const Icon(Icons.app_registration),
+          icon: const Icon(Icons.app_registration_outlined),
+          label: localization.registerPageLabel,
         ),
         NavigationDestination(
-          selectedIcon: Icon(Icons.login),
-          icon: Icon(Icons.login_outlined),
-          label: "Вход",
+          selectedIcon: const Icon(Icons.login),
+          icon: const Icon(Icons.login_outlined),
+          label: localization.loginPageLabel,
         ),
       ],
     );

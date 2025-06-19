@@ -1,0 +1,31 @@
+{
+  "loginErrorTitle": "Login error",
+  "loginWrongPasswordMessage": "Wrong password provided!",
+  "loginNoSuchUserMessage": "User with this username does not exist!",
+  "loginServerErrorMessage": "Server error! Status code: {statusCode}.",
+  "loginErrorMessage": "Cannot login. Please try again later.",
+  "loginUsernameLabel": "Username",
+  "loginPasswordLabel": "Password",
+  "loginButtonText": "Login",
+  "loginPageLabel": "Login",
+
+  "registerErrorTitle": "Registration error",
+  "registerPasswordMismatchTitle": "Password mismatch",
+  "registerPasswordMismatchMessage": "Passwords do not match!",
+  "registerSameUsernameExistsMessage": "User with this username already exists!",
+  "registerServerErrorMessage": "Server error! Status code: {statusCode}.",
+  "registerErrorMessage": "Cannot register. Please try again later.",
+  "registerDisplayNameLabel": "Display name (optional)",
+  "registerUsernameLabel": "Username",
+  "registerPasswordLabel": "Password",
+  "registerPasswordAgainLabel": "Password (again)",
+  "registerButtonText": "Register",
+  "registerPageLabel": "Register",
+
+  "mainContentNetworkSnackBarErrorMessage": "Cannot connect to server. Try again later.",
+  "mainContentNetworkSnackBarErrorButtonLabel": "Retry",
+
+  "mainNavigationBarFeedLabel": "Feed",
+  "mainNavigationBarSearchLabel": "Search",
+  "mainNavigationBarUserLabel": "User"
+}

@@ -1,3 +1,4 @@
+import 'package:feedify/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class LoginControls extends StatelessWidget {
@@ -14,6 +15,7 @@ class LoginControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return SizedBox(
       width: 300,
       child: Column(
@@ -22,21 +24,21 @@ class LoginControls extends StatelessWidget {
         children: [
           TextField(
             controller: usernameController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Имя пользователя",
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: localization.loginUsernameLabel,
             ),
           ),
           TextField(
             obscureText: true,
             controller: passwordController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Пароль",
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: localization.loginPasswordLabel,
             ),
           ),
           SizedBox(height: 10),
-          FilledButton(onPressed: loginButtonCallback, child: Text('Войти')),
+          FilledButton(onPressed: loginButtonCallback, child: Text(localization.loginButtonText)),
         ],
       ),
     );

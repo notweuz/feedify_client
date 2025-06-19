@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:feedify/app/app_data.dart';
+import 'package:feedify/l10n/app_localizations.dart';
 import 'package:feedify/repositories/auth/auth_repository.dart';
 import 'package:feedify/repositories/auth/models/register_dto.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +20,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final _passwordAgainController = TextEditingController();
 
-  static const String _passwordMismatchTitle = 'Ошибка!';
-  static const String _passwordMismatchMessage = 'Пароли не совпадают.';
-  static const String _registrationErrorTitle = 'Ошибка регистрации';
-  static const String _userExistsMessage =
-      'Пользователь с таким именем уже существует';
-  static const String _registrationErrorMessage =
-      'Произошла ошибка во время регистрации';
-
   @override
   void dispose() {
     _displayNameController.dispose();
@@ -37,11 +30,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _register() async {
+    var localizations = AppLocalizations.of(context)!;
     if (_passwordController.text != _passwordAgainController.text) {
       await ErrorDialog.show(
         context,
-        title: _passwordMismatchTitle,
-        message: _passwordMismatchMessage,
+        title: localizations.registerPasswordMismatchTitle,
+        message: localizations.registerPasswordMismatchMessage,
       );
       return;
     }
@@ -63,18 +57,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (e.response != null) {
         if (e.response!.statusCode == 409) {
-          errorMessage = _userExistsMessage;
+          errorMessage = localizations.registerSameUsernameExistsMessage;
         } else {
-          errorMessage = 'Ошибка сервера: ${e.response!.statusCode}';
+          errorMessage = localizations.registerServerErrorMessage(
+            e.response!.statusCode.toString(),
+          );
         }
       } else {
-        errorMessage = _registrationErrorMessage;
+        errorMessage = localizations.registerErrorMessage;
       }
 
       if (mounted) {
         await ErrorDialog.show(
           context,
-          title: _registrationErrorTitle,
+          title: localizations.registerErrorTitle,
           message: errorMessage,
         );
       }

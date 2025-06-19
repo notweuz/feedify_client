@@ -1,3 +1,4 @@
+import 'package:feedify/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class RegisterControls extends StatelessWidget {
@@ -18,6 +19,7 @@ class RegisterControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return SizedBox(
       width: 300,
       child: Column(
@@ -26,36 +28,39 @@ class RegisterControls extends StatelessWidget {
         children: [
           TextField(
             controller: displayNameController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Отображаемое имя (необяз.)",
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: localization.registerDisplayNameLabel,
             ),
           ),
           TextField(
             controller: usernameController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Имя пользователя",
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: localization.registerUsernameLabel,
             ),
           ),
           TextField(
             obscureText: true,
             controller: passwordController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Пароль",
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: localization.registerPasswordLabel,
             ),
           ),
           TextField(
             obscureText: true,
             controller: passwordAgainController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Пароль (заново)",
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: localization.registerPasswordAgainLabel,
             ),
           ),
           SizedBox(height: 10),
-          FilledButton(onPressed: registerButtonCallback, child: Text('Зарегистрироваться')),
+          FilledButton(
+            onPressed: registerButtonCallback,
+            child: Text(localization.registerButtonText),
+          ),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:feedify/app/app_data.dart';
 import 'package:feedify/features/main_content/widgets/widget.dart';
+import 'package:feedify/l10n/app_localizations.dart';
 import 'package:feedify/repositories/user/models/user_dto.dart';
 import 'package:feedify/repositories/user/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +26,18 @@ class MainNavigationBar extends StatefulWidget {
 class _MainNavigationBarState extends State<MainNavigationBar> {
   UserDTO? _userDTO;
   bool _isLoading = true;
-  late final StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  late final StreamSubscription<List<ConnectivityResult>>
+  _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
 
-    _connectivitySubscription = Connectivity().onConnectivityChanged.listen((results) {
-      if (results.any((result) => result != ConnectivityResult.none) && _isLoading) {
+    _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
+      results,
+    ) {
+      if (results.any((result) => result != ConnectivityResult.none) &&
+          _isLoading) {
         _getProfileInfo();
       }
     });
@@ -47,6 +52,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   }
 
   Future<void> _getProfileInfo() async {
+    final localization = AppLocalizations.of(context)!;
     try {
       final user = await UserRepository.getSelfInfo();
       setState(() {
@@ -63,8 +69,13 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Произошла ошибка. Невозможно подключиться к серверу.'),
-              action: SnackBarAction(label: "Retry", onPressed: _getProfileInfo),
+              content: Text(
+                localization.mainContentNetworkSnackBarErrorMessage,
+              ),
+              action: SnackBarAction(
+                label: localization.mainContentNetworkSnackBarErrorButtonLabel,
+                onPressed: _getProfileInfo,
+              ),
             ),
           );
         }
@@ -74,19 +85,20 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return NavigationBar(
       onDestinationSelected: widget.onDestinationSelected,
       selectedIndex: widget.selectedIndex,
       destinations: [
-        const NavigationDestination(
-          selectedIcon: Icon(Icons.feed, size: 30),
-          icon: Icon(Icons.feed_outlined, size: 30),
-          label: 'Лента',
+        NavigationDestination(
+          selectedIcon: const Icon(Icons.feed, size: 30),
+          icon: const Icon(Icons.feed_outlined, size: 30),
+          label: localization.mainNavigationBarFeedLabel,
         ),
-        const NavigationDestination(
-          selectedIcon: Icon(Icons.search, size: 30),
-          icon: Icon(Icons.search_outlined, size: 30),
-          label: 'Поиск',
+        NavigationDestination(
+          selectedIcon: const Icon(Icons.search, size: 30),
+          icon: const Icon(Icons.search_outlined, size: 30),
+          label: localization.mainNavigationBarSearchLabel,
         ),
         if (_isLoading)
           NavigationDestination(
@@ -96,7 +108,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
             icon: ClipOval(
               child: Shimmer(child: const SizedBox(width: 30, height: 30)),
             ),
-            label: '',
+            label: localization.mainNavigationBarUserLabel,
           )
         else if (_userDTO != null)
           NavigationDestination(
@@ -106,7 +118,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
               isSelected: true,
             ),
             icon: NavigationBarUserAvatar(userDTO: _userDTO!, size: 30),
-            label: 'Профиль',
+            label: localization.mainNavigationBarUserLabel,
           ),
       ],
     );
