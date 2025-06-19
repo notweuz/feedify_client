@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FeedListScreen extends StatefulWidget {
+  const FeedListScreen({super.key});
+
   @override
   _FeedListScreenState createState() => _FeedListScreenState();
 }
