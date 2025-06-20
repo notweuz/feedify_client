@@ -63,6 +63,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
               itemBuilder: (context, index) =>
                   ListTile(title: Text('Элемент #$index')),
             ),
+            // Text('аааааа'),
             Center(child: Text('Подписки')),
             Center(child: Text('Подписчики')),
           ],

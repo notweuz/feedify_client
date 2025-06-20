@@ -7,24 +7,45 @@ class UserProfileHeaderTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
+    return SliverPersistentHeader(
       pinned: true,
-      toolbarHeight: 0.0,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-      elevation: 0,
-      title: Row(children: const []),
-      titleSpacing: 0,
-      bottom: TabBar(
-        tabs: [
-          Tab(text: 'Посты'),
-          Tab(text: 'Подписки'),
-          Tab(text: 'Подписчики'),
-        ],
-        controller: tabController,
+      delegate: _SliverAppBarDelegate(
+        TabBar(
+          tabs: const [
+            Tab(text: 'Посты', height: 60),
+            Tab(text: 'Подписки', height: 60),
+            Tab(text: 'Подписчики', height: 60),
+          ],
+          controller: tabController,
+        ),
       ),
-      expandedHeight: 0,
-      flexibleSpace: const SizedBox.shrink(),
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final TabBar tabBar;
+
+  _SliverAppBarDelegate(this.tabBar);
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }
