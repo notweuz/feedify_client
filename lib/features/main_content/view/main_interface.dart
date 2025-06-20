@@ -119,7 +119,9 @@ class _MainInterfaceState extends State<MainInterface> {
                     isLoading: _isLoading,
                   )
                 else
-                  const SizedBox.shrink(),
+                  const SizedBox(
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
               ],
             ),
           ),
