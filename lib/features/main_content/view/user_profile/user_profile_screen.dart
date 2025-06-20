@@ -59,11 +59,11 @@ class _UserProfileScreenState extends State<UserProfileScreen>
           controller: tabController,
           children: [
             ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: 20,
               itemBuilder: (context, index) =>
                   ListTile(title: Text('Элемент #$index')),
             ),
-            // Text('аааааа'),
             Center(child: Text('Подписки')),
             Center(child: Text('Подписчики')),
           ],
