@@ -81,17 +81,23 @@ class _MainInterfaceState extends State<MainInterface> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MainNavigationBar(
-        onDestinationSelected: (int index) {
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-          );
-        },
-        selectedIndex: _currentPageIndex,
-        user: _user,
-        isLoading: _isLoading,
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Divider(height: 1, thickness: 1, indent: 0, endIndent: 0),
+          MainNavigationBar(
+            onDestinationSelected: (int index) {
+              _pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            },
+            selectedIndex: _currentPageIndex,
+            user: _user,
+            isLoading: _isLoading,
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -107,7 +113,11 @@ class _MainInterfaceState extends State<MainInterface> {
                 FeedListScreen(),
                 Scaffold(body: Text('ало ало')),
                 if (_user != null && !_isLoading)
-                  UserProfileScreen(user: _user!, showBackButton: false, isLoading: _isLoading)
+                  UserProfileScreen(
+                    user: _user!,
+                    showBackButton: false,
+                    isLoading: _isLoading,
+                  )
                 else
                   const SizedBox.shrink(),
               ],

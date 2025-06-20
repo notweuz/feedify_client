@@ -35,9 +35,35 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
           SliverAppBar(
             pinned: true,
-            toolbarHeight: 30.0,
-            surfaceTintColor: Theme.of(context).primaryColor,
-            title: Row(children: []),
+            toolbarHeight: 35.0,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            title: Row(children: const []),
+            titleSpacing: 0,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(1),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(onPressed: () {}, child: Text("тест")),
+                      ),
+                      Expanded(
+                        child: TextButton(onPressed: () {}, child: Text("тест")),
+                      ),
+                      Expanded(
+                        child: TextButton(onPressed: () {}, child: Text("тест")),
+                      ),
+                    ],
+                  ),
+                  const Divider(height: 1, thickness: 1, indent: 0, endIndent: 0)
+                ],
+              ),
+            ),
+            expandedHeight: 0,
+            flexibleSpace: const SizedBox.shrink(),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((
