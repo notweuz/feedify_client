@@ -18,12 +18,21 @@ class UserProfileScreen extends StatefulWidget {
   State<UserProfileScreen> createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> {
+class _UserProfileScreenState extends State<UserProfileScreen>
+    with TickerProviderStateMixin {
+  TabController? tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverToBoxAdapter(
             child: SizedBox(
               height: 300,
@@ -33,47 +42,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
           ),
-          SliverAppBar(
-            pinned: true,
-            toolbarHeight: 35.0,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-            elevation: 0,
-            title: Row(children: const []),
-            titleSpacing: 0,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(1),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextButton(onPressed: () {}, child: Text("тест")),
-                      ),
-                      Expanded(
-                        child: TextButton(onPressed: () {}, child: Text("тест")),
-                      ),
-                      Expanded(
-                        child: TextButton(onPressed: () {}, child: Text("тест")),
-                      ),
-                    ],
-                  ),
-                  const Divider(height: 1, thickness: 1, indent: 0, endIndent: 0)
-                ],
-              ),
-            ),
-            expandedHeight: 0,
-            flexibleSpace: const SizedBox.shrink(),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((
-              BuildContext context,
-              int index,
-            ) {
-              return ListTile(title: Text('Элемент #$index'));
-            }, childCount: 20),
-          ),
+          UserProfileHeaderTabs(tabController: tabController!),
         ],
+        body: TabBarView(
+          controller: tabController,
+          children: [
+            ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) =>
+                  ListTile(title: Text('Элемент #$index')),
+            ),
+            Center(child: Text('Подписки')),
+            Center(child: Text('Подписчики')),
+          ],
+        ),
       ),
     );
   }
