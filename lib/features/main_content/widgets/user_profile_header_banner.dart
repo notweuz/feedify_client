@@ -18,7 +18,7 @@ class UserProfileHeaderBanner extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Positioned.fill(
-          bottom: 200,
+          bottom: 180,
           child: isLoading
               ? Shimmer(
                   child: SizedBox(
@@ -36,7 +36,7 @@ class UserProfileHeaderBanner extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 200,
+            height: 180,
             decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           ),
         ),

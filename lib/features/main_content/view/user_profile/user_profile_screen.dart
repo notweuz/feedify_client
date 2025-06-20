@@ -23,15 +23,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: 300.0,
-            floating: false,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: UserProfileHeader(user: widget.user, isLoading: widget.isLoading),
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 300,
+              child: UserProfileHeader(
+                user: widget.user,
+                isLoading: widget.isLoading,
+              ),
             ),
-            // TODO: кнопки переключения все/медиа/нравится + кнопку назад
+          ),
+          SliverAppBar(
+            pinned: true,
+            toolbarHeight: 30.0,
+            surfaceTintColor: Theme.of(context).primaryColor,
+            title: Row(children: []),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((
