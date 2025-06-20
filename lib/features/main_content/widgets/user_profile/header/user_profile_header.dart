@@ -43,7 +43,6 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
                       width: 2,
                     ),
                   ),
-                  // child: UserAvatarWidget(user: widget.user, size: 90, isLoading: widget.isLoading),
                   child: UserAvatarWrapper(
                     size: 90,
                     child: NetworkAssetLoadingWidget(
