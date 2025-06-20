@@ -2,7 +2,6 @@ import 'package:feedify/features/main_content/widgets/widget.dart';
 import 'package:feedify/l10n/app_localizations.dart';
 import 'package:feedify/repositories/user/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
 
 class MainNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -37,25 +36,11 @@ class MainNavigationBar extends StatelessWidget {
           icon: const Icon(Icons.search_outlined, size: 30),
           label: localization.mainNavigationBarSearchLabel,
         ),
-        if (isLoading)
-          NavigationDestination(
-            selectedIcon: ClipOval(
-              child: Shimmer(child: const SizedBox(width: 30, height: 30)),
-            ),
-            icon: ClipOval(
-              child: Shimmer(child: const SizedBox(width: 30, height: 30)),
-            ),
-            label: localization.mainNavigationBarUserLabel,
-          )
-        else if (user != null)
-          NavigationDestination(
-            selectedIcon: UserAvatarWidget(
-              user: user!,
-              size: 30,
-            ),
-            icon: UserAvatarWidget(user: user!, size: 30),
-            label: localization.mainNavigationBarUserLabel,
-          ),
+        NavigationDestination(
+          selectedIcon: UserAvatarWrapper(size: 30, child: NetworkAssetLoadingWidget(isLoading: isLoading, imagePath: user?.avatarUrl, fallback: UserNoAvatarWidget(username: user?.username ?? "?"))),
+          icon: UserAvatarWrapper(size: 30, child: NetworkAssetLoadingWidget(isLoading: isLoading, imagePath: user?.avatarUrl, fallback: UserNoAvatarWidget(username: user?.username ?? "?"))),
+          label: localization.mainNavigationBarUserLabel,
+        ),
       ],
     );
   }

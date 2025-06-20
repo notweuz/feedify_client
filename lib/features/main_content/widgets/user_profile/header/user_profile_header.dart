@@ -42,7 +42,17 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
                     width: 2,
                   ),
                 ),
-                child: UserAvatarWidget(user: widget.user, size: 90),
+                // child: UserAvatarWidget(user: widget.user, size: 90, isLoading: widget.isLoading),
+                child: UserAvatarWrapper(
+                  size: 90,
+                  child: NetworkAssetLoadingWidget(
+                    isLoading: widget.isLoading,
+                    imagePath: widget.user.avatarUrl,
+                    fallback: UserNoAvatarWidget(
+                      username: widget.user.username,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 5),
               UserProfileHeaderNames(user: widget.user),

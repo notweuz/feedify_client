@@ -1,10 +1,3 @@
-export 'main_navigation_bar.dart';
-export 'user_avatar_widget.dart';
-export 'user_no_avatar_widget.dart';
-export 'user_profile_header.dart';
-export 'user_profile_header_banner.dart';
-export 'user_profile_header_no_banner.dart';
-export 'user_profile_header_names.dart';
-export 'user_profile_header_stats.dart';
-export 'user_profile_header_tabs.dart';
-export 'centered_cirular_progress_indicator.dart';
+export 'common/main_navigation_bar.dart';
+export 'common/common.dart';
+export 'user_profile/user_profile_widget.dart';

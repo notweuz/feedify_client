@@ -1,5 +1,4 @@
 import 'package:feedify/repositories/user/models/user.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileHeaderNames extends StatelessWidget {
