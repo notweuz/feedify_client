@@ -28,43 +28,45 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
       fit: StackFit.expand,
       children: [
         UserProfileHeaderBanner(user: widget.user, isLoading: widget.isLoading),
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 75),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 2,
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0, top: 75),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor,
+                      width: 2,
+                    ),
                   ),
-                ),
-                // child: UserAvatarWidget(user: widget.user, size: 90, isLoading: widget.isLoading),
-                child: UserAvatarWrapper(
-                  size: 90,
-                  child: NetworkAssetLoadingWidget(
-                    isLoading: widget.isLoading,
-                    imagePath: widget.user.avatarUrl,
-                    fallback: UserNoAvatarWidget(
-                      username: widget.user.username,
+                  // child: UserAvatarWidget(user: widget.user, size: 90, isLoading: widget.isLoading),
+                  child: UserAvatarWrapper(
+                    size: 90,
+                    child: NetworkAssetLoadingWidget(
+                      isLoading: widget.isLoading,
+                      imagePath: widget.user.avatarUrl,
+                      fallback: UserNoAvatarWidget(
+                        username: widget.user.username,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 5),
-              UserProfileHeaderNames(user: widget.user),
-              const SizedBox(height: 5),
-              UserProfileHeaderStats(user: widget.user),
-              const SizedBox(height: 5),
-              if (widget.user.description.isNotEmpty)
-                Text(
-                  widget.user.description,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-            ],
+                const SizedBox(height: 5),
+                UserProfileHeaderNames(user: widget.user),
+                const SizedBox(height: 5),
+                UserProfileHeaderStats(user: widget.user),
+                const SizedBox(height: 5),
+                if (widget.user.description.isNotEmpty)
+                  Text(
+                    widget.user.description,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+              ],
+            ),
           ),
         ),
       ],

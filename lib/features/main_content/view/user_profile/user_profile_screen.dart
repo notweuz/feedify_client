@@ -30,12 +30,23 @@ class _UserProfileScreenState extends State<UserProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: widget.user.description,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout(maxWidth: MediaQuery.of(context).size.width - 32);
+
+    final descriptionHeight = textPainter.height;
+    final headerHeight = 290 + descriptionHeight;
+
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 300,
+              height: headerHeight,
               child: UserProfileHeader(
                 user: widget.user,
                 isLoading: widget.isLoading,
