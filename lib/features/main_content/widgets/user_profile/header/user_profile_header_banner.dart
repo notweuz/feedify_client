@@ -18,7 +18,7 @@ class UserProfileHeaderBanner extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Positioned.fill(
-          bottom: 150,
+          bottom: 170,
           child: NetworkAssetLoadingWidget(
             isLoading: isLoading,
             imagePath: user.bannerUrl,
