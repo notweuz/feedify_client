@@ -1,7 +1,6 @@
 import 'package:feedify/features/main_content/main_content.dart';
 import 'package:feedify/repositories/user/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
 
 class UserProfileHeaderBanner extends StatelessWidget {
   final User user;
@@ -20,25 +19,22 @@ class UserProfileHeaderBanner extends StatelessWidget {
         Positioned.fill(
           bottom: 180,
           child: isLoading
-              ? Shimmer(
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                )
+              ? Center(child: CircularProgressIndicator())
               : (user.bannerUrl != null
-                  ? Image.network(
-                      user.bannerUrl!,
-                      fit: BoxFit.cover,
-                    )
-                  : const UserProfileHeaderNoBanner()),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: 180,
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
+                    ? Image.network(
+                        user.bannerUrl!,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return CenteredCircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                      (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                          );
+                        },
+                      )
+                    : const UserProfileHeaderNoBanner()),
         ),
       ],
     );

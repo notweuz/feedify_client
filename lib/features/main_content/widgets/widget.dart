@@ -7,3 +7,4 @@ export 'user_profile_header_no_banner.dart';
 export 'user_profile_header_names.dart';
 export 'user_profile_header_stats.dart';
 export 'user_profile_header_tabs.dart';
+export 'centered_cirular_progress_indicator.dart';
