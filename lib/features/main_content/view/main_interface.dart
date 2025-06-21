@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'package:dio/dio.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:feedify/app/app_data.dart';
@@ -80,29 +81,28 @@ class _MainInterfaceState extends State<MainInterface> {
 
   @override
   Widget build(BuildContext context) {
+    final isWindows = Platform.isWindows;
+
     return Scaffold(
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
+      body: Row(
         children: [
-          const Divider(height: 1, thickness: 1, indent: 0, endIndent: 0),
-          MainNavigationBar(
-            onDestinationSelected: (int index) {
-              _pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
-            },
-            selectedIndex: _currentPageIndex,
-            user: _user,
-            isLoading: _isLoading,
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
+          if (isWindows) ...[
+            MainNavigationRail(
+              onDestinationSelected: (int index) {
+                _pageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              },
+              selectedIndex: _currentPageIndex,
+              user: _user,
+              isLoading: _isLoading,
+            ),
+          ],
           Expanded(
             child: PageView(
+              scrollDirection: isWindows ? Axis.vertical : Axis.horizontal,
               controller: _pageController,
               onPageChanged: (index) {
                 setState(() {
@@ -127,6 +127,26 @@ class _MainInterfaceState extends State<MainInterface> {
           ),
         ],
       ),
+      bottomNavigationBar: isWindows
+          ? null
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Divider(height: 1, thickness: 1, indent: 0, endIndent: 0),
+                MainNavigationBar(
+                  onDestinationSelected: (int index) {
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  selectedIndex: _currentPageIndex,
+                  user: _user,
+                  isLoading: _isLoading,
+                ),
+              ],
+            ),
     );
   }
 }
