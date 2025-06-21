@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 class NetworkAssetLoadingWidget extends StatelessWidget {
   final String? imagePath;
+  final BoxFit? fit;
   final bool isLoading;
   final Widget? fallback;
 
   const NetworkAssetLoadingWidget({
     super.key,
     this.imagePath,
+    this.fit,
     required this.isLoading,
     this.fallback,
   });
