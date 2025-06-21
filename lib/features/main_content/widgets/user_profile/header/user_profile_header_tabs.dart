@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 class UserProfileHeaderTabs extends StatelessWidget {
@@ -7,17 +8,20 @@ class UserProfileHeaderTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isWindows = Platform.isWindows;
+
     return SliverPersistentHeader(
       pinned: true,
       delegate: _SliverAppBarDelegate(
         TabBar(
           tabs: const [
-            Tab(text: 'Посты', height: 60),
-            Tab(text: 'Подписки', height: 60),
-            Tab(text: 'Подписчики', height: 60),
+            Tab(text: 'Посты'),
+            Tab(text: 'Подписки'),
+            Tab(text: 'Подписчики'),
           ],
           controller: tabController,
         ),
+        isWindows: isWindows,
       ),
     );
   }
@@ -25,22 +29,26 @@ class UserProfileHeaderTabs extends StatelessWidget {
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar tabBar;
+  final bool isWindows;
 
-  _SliverAppBarDelegate(this.tabBar);
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
+  _SliverAppBarDelegate(this.tabBar, {required this.isWindows});
 
   @override
-  double get maxExtent => tabBar.preferredSize.height;
+  double get minExtent => isWindows ? 50 : 80;
+
+  @override
+  double get maxExtent => isWindows ? 50 : 80;
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: tabBar,
+      child: SizedBox(height: isWindows ? 50 : 80, child: tabBar),
     );
   }
 

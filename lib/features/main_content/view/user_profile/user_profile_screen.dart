@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:feedify/features/main_content/widgets/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:feedify/repositories/user/models/user.dart';
@@ -30,6 +31,8 @@ class _UserProfileScreenState extends State<UserProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isWindows = Platform.isWindows;
+
     final textPainter = TextPainter(
       text: TextSpan(
         text: widget.user.description,
@@ -39,7 +42,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
     )..layout(maxWidth: MediaQuery.of(context).size.width - 32);
 
     final descriptionHeight = textPainter.height;
-    final headerHeight = 290 + descriptionHeight;
+    final headerHeight = (isWindows ? 270 : 310) + descriptionHeight;
 
     return Scaffold(
       body: NestedScrollView(
