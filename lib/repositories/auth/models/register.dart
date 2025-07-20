@@ -10,7 +10,7 @@ class Register {
   });
 
   Map<String, dynamic> toJson() => {
-    'display_name': displayName,
+    'display_name': (displayName != null && displayName!.isEmpty) ? null : displayName,
     'username': username,
     'password': password,
   };
