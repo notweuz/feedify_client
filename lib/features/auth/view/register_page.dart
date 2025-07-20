@@ -50,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
       AppData.userToken = authDTO.accessToken;
-      AppData.saveData();
+      await AppData.saveData();
       if (mounted) Navigator.pushNamed(context, '/app/');
     } on DioException catch (e) {
       String errorMessage;
@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
           errorMessage = localizations.registerSameUsernameExistsMessage;
         } else {
           errorMessage = localizations.registerServerErrorMessage(
-            e.response!.statusCode.toString(),
+            e.response!.data.toString(),
           );
         }
       } else {
